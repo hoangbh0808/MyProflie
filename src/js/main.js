@@ -16,47 +16,30 @@ const scrollTop = () => {
 			scrollTop: 0,
 		});
 	});
-}
+};
 
 /*==================== MAIN MENU MOBILE ====================*/
 const mainMenu = () => {
-	$("header .navbar").find(".btn-toggle").on("click", function () {
-		$(this).toggleClass("active");
+	$(".btn-toggle").on("click", () => {
+		let $this = $(".btn-toggle");
+		$this.toggleClass("active");
 		$("#overlay").toggleClass("active");
-		$('header').find('.nav-left').toggleClass('active')
+		$(".nav-wrapper .navbar").toggleClass("active");
 	});
-	$("#overlay").on('click', function () {
+	$("#overlay").on("click", function () {
 		let $this = $(this);
-		$this.removeClass('active');
-		$('.btn-toggle').removeClass('active');
-		$('header').find('.nav-left').removeClass('active')
+		$this.removeClass("active");
+		$(".btn-toggle").removeClass("active");
+		$(".nav-wrapper .navbar").removeClass("active");
 	});
-	$('.btn-toggle-search').on('click', function () {
-		$(this).siblings('.search-box').slideToggle()
-	})
-}
+	$(".btn-toggle-search").on("click", function () {
+		$(this).siblings(".search-box").slideToggle();
+	});
+};
 
 /*==========LISTBANNER SLIDER==========*/
-const listBanner = () => {
-	let myswiper = new Swiper(".home-banner .swiper-container", {
-		loop: false,
-		speed: 2000,
-		effect: "fade",
-		grabCursor: true,
-		// autoplay: {
-		// 	delay: 3000,
-		// 	disableOnInteraction: false,
-		// },
-		fadeEffect: {
-			crossFade: true,
-		},
-		navigation: {
-			nextEl: ".home-banner .swiper-button-next",
-			prevEl: ".home-banner .swiper-button-prev",
-		},
-	});
-}
-// ===========================CHECK BANNER=========================//
+const initBanner = () => {};
+// ===========================CHECK BANNER========================= //
 const checkLayoutBanner = () => {
 	const pagesBanner = $("#pagebanner");
 	const heightHeader = $("header").outerHeight();
@@ -69,21 +52,37 @@ const checkLayoutBanner = () => {
 		$("main").css("padding-top", heightHeader);
 	}
 };
-
-const initMapping = () => {
-	$("header .navbar .nav-right .account-wrapper").mapping({
-		mobileWrapper: "header .nav-top .wrapper-right",
-		mobileMethod: "appendTo",
-		desktopWrapper: "header .navbar .nav-right",
-		desktopMethod: "appento",
-		breakpoint: 991.98,
+// =========================== BUTTON SEARCH MOBILE =========================== //
+const searchButton = () => {
+	$(".search-box .button-search").on("click", () => {
+		let $this = $(".search-box .button-search");
+		$this.siblings(".form-group ").slideToggle();
 	});
-}
+};
+// =========================SET BACKGROUND ====================================== //
+const setBackgroundElement = () => {
+	$("[setBackground]").each(function () {
+		var background = $(this).attr("setBackground");
+		$(this).css({
+			"background-image": "url(" + background + ")",
+			"background-size": "cover",
+			"background-position": "center center",
+		});
+	});
+	$("[setBackgroundRepeat]").each(function () {
+		var background = $(this).attr("setBackgroundRepeat");
+		$(this).css({
+			"background-image": "url(" + background + ")",
+			"background-repeat": "repeat",
+		});
+	});
+};
 /*==================== LOAD FUNCTION ====================*/
 $(document).ready(function () {
 	scrollTop();
 	mainMenu();
-	listBanner();
-	initMapping();
+	initBanner();
+	searchButton();
+	setBackgroundElement();
 	// checkLayoutBanner();
 });
