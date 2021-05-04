@@ -67,12 +67,6 @@ const setBackgroundElement = () => {
 			"background-image": "url(" + background + ")",
 			"background-size": "cover",
 			"background-position": "center center",
-		});
-	});
-	$("[setBackgroundRepeat]").each(function () {
-		var background = $(this).attr("setBackgroundRepeat");
-		$(this).css({
-			"background-image": "url(" + background + ")",
 			"background-repeat": "repeat",
 		});
 	});
